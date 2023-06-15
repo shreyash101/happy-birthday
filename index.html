@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f7f7f7;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 100px;
+        }
+
+        #confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .confetti {
+            position: absolute;
+            background-color: #f00;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Birthday!</h1>
+
+    <div id="confetti-container"></div>
+
+    <script>
+        // Generate random number within a range
+        function getRandomNumber(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        // Generate random color
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Create confetti
+        function createConfetti() {
+            var confettiContainer = document.getElementById("confetti-container");
+            var confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.style.top = getRandomNumber(10, 80) + "%";
+            confetti.style.left = getRandomNumber(10, 90) + "%";
+            confetti.style.opacity = getRandomNumber(0.5, 1);
+            confetti.style.transform = "rotate(" + getRandomNumber(0, 360) + "deg)";
+            confetti.style.backgroundColor = getRandomColor();
+            confettiContainer.appendChild(confetti);
+
+            setTimeout(function() {
+                confettiContainer.removeChild(confetti);
+            }, 5000); // Remove confetti after 5 seconds
+        }
+
+        // Trigger confetti
+        function triggerConfetti() {
+            setInterval(function() {
+                createConfetti();
+            }, 200); // Adjust the frequency of confetti creation
+        }
+
+        // Start confetti on page load
+        window.onload = function() {
+            triggerConfetti();
+        };
+    </script>
+</body>
+</html>
