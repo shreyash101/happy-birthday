@@ -142,6 +142,9 @@ let then = timestamp()
 
 let birthday = new Birthday
 window.onresize = () => birthday.resize()
+window.onload = function() {
+    document.getElementById("my_audio").play();
+}
 document.onclick = evt => birthday.onClick(evt)
 document.ontouchstart = evt => birthday.onClick(evt)
 
